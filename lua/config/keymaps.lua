@@ -155,3 +155,36 @@ vim.api.nvim_set_keymap("x", "S", "<Plug>VSurround", { noremap = false })
 -- This plugin makes commands more repeatable without requiring any explicit keymap configuration.
 
 -- You can also add custom repeat behavior if needed, but default behavior is generally enough.
+-- -- config/keymaps.lua
+
+-- Load the LSP confirmation function from lspconfig.lua
+
+-- Bind the keymap for LSP confirmation (use <leader>lc as the keybinding)
+vim.api.nvim_set_keymap(
+	"n",
+	"<leader>as",
+	':lua require("plugins.lspconfig").lsp_confirmation()<CR>',
+	{ noremap = true, silent = true }
+)
+
+-- =================trouble==============================
+local map = vim.keymap.set
+
+-- Trouble keybindings
+map("n", "<leader>xx", "<cmd>Trouble diagnostics toggle<cr>", { desc = "Diagnostics (Trouble)" })
+map("n", "<leader>xX", "<cmd>Trouble diagnostics toggle filter.buf=0<cr>", { desc = "Buffer Diagnostics (Trouble)" })
+map("n", "<leader>cs", "<cmd>Trouble symbols toggle focus=false<cr>", { desc = "Symbols (Trouble)" })
+map(
+	"n",
+	"<leader>cl",
+	"<cmd>Trouble lsp toggle focus=false win.position=right<cr>",
+	{ desc = "LSP Definitions / references (Trouble)" }
+)
+map("n", "<leader>xL", "<cmd>Trouble loclist toggle<cr>", { desc = "Location List (Trouble)" })
+map("n", "<leader>xQ", "<cmd>Trouble qflist toggle<cr>", { desc = "Quickfix List (Trouble)" })
+map("n", "gR", "<cmd>Trouble lsp_references toggle<cr>", { desc = "LSP References (Trouble)" })
+vim.keymap.set("n", "<leader>xt", "<cmd>Trouble toggle<CR>", { desc = "Toggle Trouble" })
+
+-- ==================== Commenting (vim-commentary) ====================
+vim.keymap.set("n", "<C-/>", "gcc", { noremap = false, silent = true })
+vim.keymap.set("v", "<C-/>", "gc", { noremap = false, silent = true })

@@ -134,4 +134,14 @@ return {
 			})
 		end,
 	},
+	-- Function to check if LSP is attached and print confirmation
+	lsp_confirmation = function()
+		-- Check if an LSP is attached to the current buffer
+		local clients = vim.lsp.get_clients()
+		if next(clients) == nil then
+			print("LSP Attached: ❌ No")
+		else
+			print("LSP Attached: ✅ Yes")
+		end
+	end,
 }

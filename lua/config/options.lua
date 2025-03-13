@@ -23,3 +23,24 @@ vim.opt.clipboard = "unnamedplus"
 vim.opt.termguicolors = true
 
 vim.opt.winblend = 0 -- or keep it below 10
+
+-----------neoterm-----------
+
+-- Terminal settings
+vim.opt.termguicolors = true -- Enable true color support in terminals
+
+-- Open new split windows above the current window by default
+vim.opt.splitbelow = true
+
+-- Set the height of terminal windows (adjust if necessary)
+vim.g.neoterm_size = 20 -- Height of the terminal window
+
+-- Enable the terminal buffer to automatically scroll as new output is added
+vim.g.neoterm_autoscroll = 1
+
+-- Customize how the terminal behaves when switching between windows
+vim.g.neoterm_default_mod = "toggle" -- Toggle terminal mode (opens and closes with the same key)
+
+-- Optional: Allow for smooth switching between terminal and other windows
+vim.opt.hidden = true
+vim.opt.scrolloff = 8 -- Always show some context above/below the cursor
