@@ -44,10 +44,3 @@ vim.g.neoterm_default_mod = "toggle" -- Toggle terminal mode (opens and closes w
 -- Optional: Allow for smooth switching between terminal and other windows
 vim.opt.hidden = true
 vim.opt.scrolloff = 8 -- Always show some context above/below the cursor
-
---------themery---------------
--- Load last used theme
-local ok, _ = pcall(vim.cmd, "colorscheme " .. vim.g.colors_name)
-if not ok then
-	vim.cmd("colorscheme catppuccin-mocha") -- Fallback theme
-end
