@@ -34,24 +34,9 @@ return {
 		"mfussenegger/nvim-lint",
 		config = function()
 			require("lint").linters_by_ft = {
-				python = { "pylint", "flake8" }, -- Use Pylint & Flake8 for Python
+				python = { "flake8" }, -- Use Pylint & Flake8 for Python
 				lua = { "luacheck" }, -- Use Luacheck for Lua
 			}
-
-			-- Auto-run linting on file save
-			vim.api.nvim_create_autocmd({ "BufWritePost" }, {
-				callback = function()
-					require("lint").try_lint()
-				end,
-			})
-
-			-- Ensure diagnostics are displayed properly
-			vim.diagnostic.config({
-				virtual_text = true, -- Show inline errors
-				signs = true, -- Show error signs in gutter
-				update_in_insert = false,
-				severity_sort = true,
-			})
 		end,
 	},
 }

@@ -97,6 +97,14 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		local function buf_keymap(mode, lhs, rhs, desc)
 			vim.keymap.set(mode, lhs, rhs, { buffer = buf, noremap = true, silent = true, desc = desc })
 		end
+		-- Function to close all floating windows
+		local function close_floating_windows()
+			for _, win in pairs(vim.api.nvim_list_wins()) do
+				if vim.api.nvim_win_get_config(win).relative ~= "" then
+					vim.api.nvim_win_close(win, true)
+				end
+			end
+		end
 
 		buf_keymap("n", "gd", vim.lsp.buf.definition, "Go to Definition")
 		buf_keymap("n", "gD", vim.lsp.buf.declaration, "Go to Declaration")
@@ -109,6 +117,8 @@ vim.api.nvim_create_autocmd("LspAttach", {
 		buf_keymap("n", "<leader>lf", function()
 			vim.lsp.buf.format({ async = true })
 		end, "Format Code")
+		-- Map <Esc> to close all floating windows
+		buf_keymap("n", "<Esc>", close_floating_windows, "Close Floating Windows")
 	end,
 })
 

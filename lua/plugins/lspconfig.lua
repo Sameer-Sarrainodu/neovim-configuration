@@ -33,6 +33,19 @@ return {
 				lspconfig_defaults.capabilities,
 				require("cmp_nvim_lsp").default_capabilities()
 			)
+			-- Disable inline errors until save
+			vim.diagnostic.config({
+				virtual_text = true,
+				signs = true,
+				underline = true,
+				severity_sort = true,
+				update_in_insert = false, -- Do not update diagnostics in insert mode
+			})
+			vim.api.nvim_create_autocmd({ "TextChanged", "TextChangedI" }, {
+				callback = function()
+					vim.lsp.buf.hover() -- Dummy request to force diagnostics refresh
+				end,
+			})
 
 			-- Python LSP Setup (pylsp)
 			nvim_lsp.pylsp.setup({
@@ -45,7 +58,10 @@ return {
 								maxLineLength = 100, -- Set max line length to 100
 							},
 							flake8 = { enabled = true }, -- Enable flake8 linting
-							pylint = { enabled = true }, -- Enable pylint
+							pylint = {
+								enabled = false,
+								args = { "--disable=missing-module-docstring" },
+							}, -- Enable pylint
 						},
 					},
 				},
